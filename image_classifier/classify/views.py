@@ -24,7 +24,6 @@ def index(request):
             # Obtain the file path of the saved image
             file_path = instance.image.path
             last_uploaded_image = UploadedImage.objects.last()
-            last_uploaded_image_url = last_uploaded_image.image.url
             img_class, confidence = predict_image(file_path)
             return render(request, 'index.html', {'form': form, 'file_path': file_path, 'last_uploaded_image': last_uploaded_image,'img_class':img_class, 'confidence': confidence})
     else:
