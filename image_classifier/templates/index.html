@@ -18,17 +18,27 @@
     <section>
         <div class="container" style="text-align: center;">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-12">
                     <div class="row">
-                        <form action="upload_image" method="post" enctype="multipart/form-data">
+                        <form method="post" enctype="multipart/form-data">
                             <div class="col-md-12">
                                 {% csrf_token %}
-                                <input type="file" name="image_file">
+                                {{ form.as_p }}
+                                <!-- {{ file_path }} -->
+                                <!-- {{ last_uploaded_image.image.url }} -->
                                 <button type="submit" class="btn btn-primary">Upload</button>
-                                <!-- <button type="button" name="" id="" class="btn btn-primary">Upload Image</button>         -->
                             </div>
                             <br>
-                            <br>
+                            <div class="col-md-12">
+                                <h3>Uploaded Images:</h3>
+                                <ul>
+                                    {% if last_uploaded_image %}
+                                    <li><img src="{{ last_uploaded_image.image.url }}" alt="Last Uploaded Image"></li>
+                                    {% else %}
+                                    <li>No images uploaded yet.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
                             <div class="col-md-12">
                                 <b>Label:</b>
                                 <input type="text" name="label" id="label">
